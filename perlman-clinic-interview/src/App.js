@@ -1,14 +1,16 @@
 import React from 'react';
 import './App.css';
-import ContactForm from './Components/ContactForm/ContactForm';
 import Navbar from './Components/Navbar/Navbar';
+import { withRouter } from "react-router";
+import routes from './Modules/routes';
+
 function App() {
   return (
     <div className="App">
       <Navbar />
-      <ContactForm />
+      {routes}
     </div>
   );
 }
 
-export default App;
+export default withRouter(App);

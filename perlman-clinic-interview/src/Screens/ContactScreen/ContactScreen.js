@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CompanyInformation from '../../Components/CompanyInformation/CompanyInformation';
 import ContactForm from '../../Components/ContactForm/ContactForm';
-import PerlmanOffice from '../../Assets/perlman-office.jpg';
+import PerlmanOffice from '../../Assets/perlman-office.png';
 
 class ContactScreen extends Component {
   render() {

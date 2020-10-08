@@ -16,19 +16,19 @@ class ButtonOptions extends Component {
         }}
       >
         <a href="https://perlmanclinic.com/book-an-appointment/"
-          style={{ height: '55%', width: '30%', border: '2px black solid' }}
+          style={{ height: '55%', width: '30%', border: '2px black solid', textDecoration:'none' }}
         >
           <Button style={{height: '100%', width: '100%'}}>Schedule Appointment</Button>
         </a>
 
-        <a href="https://perlmanclinic.com/our-team/" style={{ height: '55%', width: '30%', border: '2px black solid'}}>
+        <a href="https://perlmanclinic.com/our-team/" style={{ height: '55%', width: '30%', border: '2px black solid', textDecoration:'none'}}>
         <Button style={{height: '100%', width: '100%'}}>
           Our Team
         </Button>
         </a>
 
         <Link
-          style={{ height: '55%', width: '30%', border: '2px black solid' }}
+          style={{ height: '55%', width: '30%', border: '2px black solid', textDecoration:'none' }}
           to="/contact"
         >
           <Button style={{height: '100%', width: '100%'}}>Send Us a Message</Button>

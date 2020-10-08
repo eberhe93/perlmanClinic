@@ -7,7 +7,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 In the project directory, you can run:
 ### `npm install`
 
-Please run before starting application.
+Please run before starting application. The contact form can be found under 'Send Us A Message' section.
 
 ### `npm start`
 

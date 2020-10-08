@@ -67,7 +67,7 @@ class ContactForm extends Component {
     console.log(this.state);
     return (
       <div style={{width:'50%'}}>
-        <h1> Contact Form </h1>
+        <h1>Contact Us Anytime</h1>
         <form>
           {this.state.name.length === 0 && this.state.validated ? (
             <ErrorMessage name="name" errors={this.state.errors} />

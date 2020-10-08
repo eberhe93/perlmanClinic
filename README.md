@@ -21,3 +21,4 @@ Technologies Used:
 
 ## Future enhancements:
 - Making fully mobile-responsive
+- Complete email validation, as found in `form-validation.js`

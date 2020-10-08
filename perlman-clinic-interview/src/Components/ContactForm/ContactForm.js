@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import { validateEmail } from '../../Modules/form-validation';
 import {
   TextField,
   FormControl,
@@ -8,7 +7,6 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
-  TextareaAutosize,
   Button
 } from '@material-ui/core/';
 import Api from '../../Modules/api';
@@ -39,6 +37,7 @@ class ContactForm extends Component {
     this.submitForm = this.submitForm.bind(this);
   }
 
+  // handling text change of input
   handleInputChange(e) {
     const { userData } = { ...this.state };
     const currentState = userData;
@@ -48,13 +47,16 @@ class ContactForm extends Component {
     this.setState({ userData: currentState });
   }
 
+  // handling gender input change
   setGender(e) {
     this.state.userData['gender'] = e.target.value;
   }
 
+  // sending API request
   submitForm() {
     this.setState({ errors: [], validated: true });
 
+    // timeout to simulate request processing time
     setTimeout(() => {
       Api.postToSuccess(this.state.userData).then(res => {
         this.showLoading = false;
@@ -75,6 +77,7 @@ class ContactForm extends Component {
     }, 3000);
   }
 
+  // Checking that all fields have been filled out
   getValidationErrors() {
     const errorList = [];
 
@@ -96,6 +99,7 @@ class ContactForm extends Component {
     }
   }
 
+  // Showing toast message after API call
   showToastMessage(statusCode) {
     if (statusCode === 200) {
       this.setState({
@@ -116,6 +120,8 @@ class ContactForm extends Component {
         showToast: true
       });
     }
+
+    // Controlling time toast message is shown on screen
     setTimeout(() => this.setState({ showToast: false, errorType: '' }), 5000);
   }
   render() {

@@ -18,3 +18,6 @@ Technologies Used:
 - React
 - React-Router
 - Material UI
+
+## Future enhancements:
+- Making fully mobile-responsive

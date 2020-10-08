@@ -11,6 +11,7 @@ import {
   TextareaAutosize,
   Button
 } from '@material-ui/core/';
+import Api from '../../Modules/api';
 
 class ContactForm extends Component {
   constructor(props) {
@@ -51,6 +52,7 @@ class ContactForm extends Component {
     console.log(this.state.errors);
     this.setState({ errors: errorList, validated: true });
     //   console.log(errorList.length > 0 ? errorList : undefined);
+    Api.postToSuccess(this.state)
   }
 
   submitForm(e) {

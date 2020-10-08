@@ -5,8 +5,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import PerlmanLogo from '.../../../assets/perlman_logo-e1560545004377.png';
+import PerlmanLogo from '../../Assets/perlman_logo-e1560545004377.png';
 import HamburgerMenuIcon from './HamburgerMenuIcon/HamburgerMenuIcon';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,12 +22,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const menuItems = [
-    {title: 'Patient Info'},
-    {title: 'Team'},
-    {title: 'Locations'},
-    {title: 'MyChart'},
-    {title: 'PocketDoc'},
-    {title: 'Help'},
+    {title: 'About Us', link: 'https://perlmanclinic.com/about-us/'},
+    {title: 'Team', link: 'https://perlmanclinic.com/our-team/'},
+    {title: 'Locations', link: 'https://perlmanclinic.com/clinic-locations/'},
+    {title: 'MyChart', link: 'https://mychart.perlmanclinic.com/mpc/'},
+    {title: 'PocketDoc', link: 'https://pocketdocapp.com/'},
+    {title: 'Help', link: 'https://perlmanclinic.com/support/'},
 ]
 
 export default function ButtonAppBar() {
@@ -37,12 +38,16 @@ export default function ButtonAppBar() {
       <AppBar position="static" color="default">
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="red" aria-label="menu">
+            <Link to="/">
             <img src={PerlmanLogo} style={{width:175}} />
+            </Link>
           </IconButton>
-          <div style={{float:'right'}}>
-          {menuItems.map(item => (<Button variant="h6" className={classes.title}>
+          <div>
+          {menuItems.map(item => (
+          <a href={item.link} style={{textDecoration:'none'}}>
+          <Button variant="h6" className={classes.title}>
             {item.title}
-          </Button>))}
+          </Button></a>))}
           </div>
             {/* <HamburgerMenuIcon/> */}
         </Toolbar>

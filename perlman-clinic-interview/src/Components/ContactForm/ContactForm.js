@@ -12,6 +12,7 @@ import {
   Button
 } from '@material-ui/core/';
 import Api from '../../Modules/api';
+import ProgressBar from '../ProgressBar/ProgressBar';
 
 class ContactForm extends Component {
   constructor(props) {
@@ -23,6 +24,8 @@ class ContactForm extends Component {
       gender: '',
       message: ''
     };
+
+    this.showLoading = false;
 
     this.getValidationErrors = this.getValidationErrors.bind(this);
     this.submitForm = this.submitForm.bind(this);
@@ -128,7 +131,7 @@ class ContactForm extends Component {
               </RadioGroup>
             </FormControl>
           </div>
-          <div style={{ marginTop: 50 }}>
+          <div style={{ marginTop: 50, marginBottom: 10 }}>
             {!this.state.message && this.state.validated ? (
               <ErrorMessage name="message" errors={this.state.errors} />
             ) : null}
@@ -144,7 +147,8 @@ class ContactForm extends Component {
               fullWidth={true}
             />
           </div>
-          <Button onClick={this.submitForm}>Submit</Button>
+        {this.showLoading ? <ProgressBar /> : null}
+          <Button style={{border:'1px green solid'}} onClick={this.submitForm}>Submit</Button>
         </form>
       </div>
     );

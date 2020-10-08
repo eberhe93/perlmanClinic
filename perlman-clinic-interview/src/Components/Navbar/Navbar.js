@@ -7,9 +7,9 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import PerlmanLogo from '../../Assets/perlman_logo-e1560545004377.png';
 import MenuIcon from '@material-ui/icons/Menu';
-import HamburgerMenuIcon from './HamburgerMenuIcon/HamburgerMenuIcon';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
+import { styles } from '../../Modules/styles';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -43,13 +43,13 @@ class Navbar extends Component {
           <div className="left">
             <IconButton edge="start" color="red" aria-label="menu">
               <Link to="/">
-                <img src={PerlmanLogo} style={{ width: 175 }} />
+                <img src={PerlmanLogo} style={styles.navbarLogo} />
               </Link>
             </IconButton>
           </div>
           <div className="right">
             {menuItems.map(item => (
-              <a href={item.link} style={{ textDecoration: 'none' }}>
+              <a href={item.link} style={styles.contactInformationHref}>
                 <Button variant="h6">{item.title}</Button>
               </a>
             ))}

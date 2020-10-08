@@ -1,41 +1,30 @@
 import React, { Component } from 'react';
 import { Button } from '@material-ui/core';
-import { Link, Switch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { styles } from '../../Modules/styles';
 
-class ButtonOptions extends Component {
-  render() {
-    return (
-      <div
-        style={{
-          width: '75%',
-          height: 500,
-          justifyContent: 'space-around',
-          display: 'flex',
-          alignItems: 'center',
-          margin: '0 auto'
-        }}
+const ButtonOptions = () => {
+  return (
+    <div style={styles.squareButtonContainer}>
+      <a
+        href="https://perlmanclinic.com/book-an-appointment/"
+        style={styles.squareButtonHref}
       >
-        <a href="https://perlmanclinic.com/book-an-appointment/"
-          style={{ height: '55%', width: '30%', border: '2px black solid', textDecoration:'none' }}
-        >
-          <Button style={{height: '100%', width: '100%'}}>Schedule Appointment</Button>
-        </a>
+        <Button style={styles.squareButtonWidth}>Schedule Appointment</Button>
+      </a>
 
-        <a href="https://perlmanclinic.com/our-team/" style={{ height: '55%', width: '30%', border: '2px black solid', textDecoration:'none'}}>
-        <Button style={{height: '100%', width: '100%'}}>
-          Our Team
-        </Button>
-        </a>
+      <a
+        href="https://perlmanclinic.com/our-team/"
+        style={styles.squareButtonHref}
+      >
+        <Button style={styles.squareButtonWidth}>Our Team</Button>
+      </a>
 
-        <Link
-          style={{ height: '55%', width: '30%', border: '2px black solid', textDecoration:'none' }}
-          to="/contact"
-        >
-          <Button style={{height: '100%', width: '100%'}}>Send Us a Message</Button>
-        </Link>
-      </div>
-    );
-  }
-}
+      <Link style={styles.squareButtonHref} to="/contact">
+        <Button style={styles.squareButtonWidth}>Send Us a Message</Button>
+      </Link>
+    </div>
+  );
+};
 
 export default ButtonOptions;

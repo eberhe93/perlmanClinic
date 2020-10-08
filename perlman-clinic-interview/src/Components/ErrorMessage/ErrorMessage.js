@@ -1,9 +1,11 @@
 
 import React from 'react';
+import { constants } from '../../Modules/contants';
+import { styles } from '../../Modules/styles';
 
 const ErrorMessage = () => {
     return(
-        <div style={{color:'red'}}> Please fill out the missing field. </div>
+        <div style={styles.inputErrorMessageText}> {constants.inputError.errorMessage} </div>
     )
 }
 export default ErrorMessage; 

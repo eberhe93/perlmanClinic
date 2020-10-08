@@ -15,6 +15,7 @@ import Api from '../../Modules/api';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import ToastMessage from '../ToastMessage/ToastMessage';
 import { constants } from '../../Modules/contants';
+import { styles } from '../../Modules/styles';
 
 class ContactForm extends Component {
   constructor(props) {
@@ -25,14 +26,13 @@ class ContactForm extends Component {
       errors: [],
       validated: false,
       showToast: false,
-      errorType: ''
-    };
-
-    this.userData = {
-      name: '',
-      email: '',
-      gender: '',
-      message: ''
+      errorType: '',
+      userData: {
+        name: '',
+        email: '',
+        gender: '',
+        message: ''
+      }
     };
 
     this.getValidationErrors = this.getValidationErrors.bind(this);
@@ -40,33 +40,24 @@ class ContactForm extends Component {
   }
 
   handleInputChange(e) {
-    this.userData[e.target.name] = e.target.value;
-    // this.setState({ [e.target.name]: e.target.value });
+    const { userData } = { ...this.state };
+    const currentState = userData;
+    const { name, value } = e.target;
+    currentState[name] = value;
+
+    this.setState({ userData: currentState });
   }
 
   setGender(e) {
-    this.userData['gender'] = e.target.value;
-    // this.setState({ gender: e.target.value });
+    this.state.userData['gender'] = e.target.value;
   }
 
-  getValidationErrors() {
-    const errorList = [];
+  submitForm() {
+    this.setState({ errors: [], validated: true });
 
-    for (let [key, value] of Object.entries(this.userData)) {
-      if (!value) {
-        errorList.push(key);
-      }
-    }
-
-    // Validate emails && returns proper error message
-    if (this.state.email && !validateEmail(this.state.email)) {
-      errorList.push('Please enter a valid email address');
-    }
-    this.setState({ errors: errorList, validated: true });
-    if (errorList && errorList.length === 0) {
-      Api.postToSuccess(this.userData).then(res => {
+    setTimeout(() => {
+      Api.postToSuccess(this.state.userData).then(res => {
         this.showLoading = false;
-        console.log(res.status);
         if (res.status === 200) {
           res.json().then(data => this.showToastMessage(res.status));
         } else {
@@ -77,29 +68,47 @@ class ContactForm extends Component {
               console.log(json);
             })
             .catch(ex => {
-              // handle errors here
               this.showToastMessage(res.status);
             });
         }
       });
-    }
+    }, 3000);
   }
 
-  submitForm(e) {
-    e.preventDefault();
-    this.showLoading = true;
-    this.setState({
-      errors: [],
-      validated: false
-    });
-    this.getValidationErrors();
+  getValidationErrors() {
+    const errorList = [];
+
+    for (let [key, value] of Object.entries(this.state.userData)) {
+      if (!value) {
+        errorList.push(key);
+      }
+    }
+
+    this.setState({ validated: true });
+
+    if (errorList.length === 0) {
+      this.setState({
+        errors: [],
+        validated: false
+      });
+      this.showLoading = true;
+      this.submitForm();
+    }
   }
 
   showToastMessage(statusCode) {
     if (statusCode === 200) {
       this.setState({
         errorType: constants.toastmessages.successMessage,
-        showToast: true
+        showToast: true,
+        errors: [],
+        validated: false,
+        userData: {
+          name: '',
+          email: '',
+          gender: '',
+          message: ''
+        }
       });
     } else {
       this.setState({
@@ -111,11 +120,13 @@ class ContactForm extends Component {
   }
   render() {
     return (
-      <div style={{ width: '50%' }}>
-        <h1>Contact Us Anytime</h1>
+      <div
+        style={styles.contactFormContainer}
+      >
         <form>
           <div>
-            {this.userData['name'].length === 0 && this.state.validated ? (
+            {this.state.userData['name'].length === 0 &&
+            this.state.validated ? (
               <ErrorMessage name="name" errors={this.state.errors} />
             ) : null}
             <TextField
@@ -123,29 +134,33 @@ class ContactForm extends Component {
               id="standard-basic"
               label="Name"
               name="name"
+              value={this.state.userData['name']}
               onChange={e => this.handleInputChange(e)}
             />
           </div>
-          <div style={{ marginTop: 50 }}>
-            {this.userData['email'].length === 0 && this.state.validated ? (
+          <div style={styles.contactInputMarginTop}>
+            {this.state.userData['email'].length === 0 &&
+            this.state.validated ? (
               <ErrorMessage name="email" errors={this.state.errors} />
             ) : null}
             <TextField
               fullWidth={true}
               id="standard-basic"
               label="Email"
-              name="email"
+              value={this.state.userData['email']}
+              name={'email'}
               onChange={e => this.handleInputChange(e)}
             />
           </div>
-          <div style={{ marginTop: 50 }}>
-            {this.userData['gender'].length === 0 && this.state.validated ? (
+          <div style={styles.contactInputMarginTop}>
+            {this.state.userData['gender'].length === 0 &&
+            this.state.validated ? (
               <ErrorMessage name="gender" errors={this.state.errors} />
             ) : null}
 
             <FormControl component="fieldset">
               <FormLabel
-                style={{ marginTop: 10, marginBottom: 20 }}
+                style={styles.contactGenderMargin}
                 component="legend"
               >
                 Gender
@@ -173,8 +188,9 @@ class ContactForm extends Component {
               </RadioGroup>
             </FormControl>
           </div>
-          <div style={{ marginTop: 50, marginBottom: 10 }}>
-            {this.userData['message'].length === 0 && this.state.validated ? (
+          <div style={styles.contactMessageMargin}>
+            {this.state.userData['message'].length === 0 &&
+            this.state.validated ? (
               <ErrorMessage name="message" errors={this.state.errors} />
             ) : null}
 
@@ -187,16 +203,16 @@ class ContactForm extends Component {
               name="message"
               variant="outlined"
               fullWidth={true}
+              value={this.state.userData['message']}
             />
           </div>
           <Button
-            style={{ border: '1px green solid' }}
-            onClick={this.submitForm}
+            style={styles.greenBorder}
+            onClick={this.getValidationErrors}
           >
             Submit
           </Button>
           {this.showLoading ? <ProgressBar /> : null}
-          {/* {JSON.stringify(this.state.errorType)} */}
           {this.state.showToast ? (
             <ToastMessage message={this.state.errorType} />
           ) : null}

@@ -41,7 +41,7 @@ class Navbar extends Component {
       <div>
         <div className={top_menu_class}>
           <div className="left">
-            <IconButton edge="start" color="red" aria-label="menu">
+            <IconButton edge="start" aria-label="menu">
               <Link to="/">
                 <img src={PerlmanLogo} style={styles.navbarLogo} />
               </Link>
@@ -49,8 +49,8 @@ class Navbar extends Component {
           </div>
           <div className="right">
             {menuItems.map(item => (
-              <a href={item.link} style={styles.contactInformationHref}>
-                <Button variant="h6">{item.title}</Button>
+              <a href={item.link} style={styles.contactInformationHref} key={item.title}>
+                <Button>{item.title}</Button>
               </a>
             ))}
           </div>

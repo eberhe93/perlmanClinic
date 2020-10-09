@@ -77,5 +77,8 @@ export const styles = {
     },
     greenHeaderText: {
         color: colors.green
+    },
+    contactFormWidth: {
+        width:'75%'
     }
 }

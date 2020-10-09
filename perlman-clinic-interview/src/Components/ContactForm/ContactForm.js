@@ -129,7 +129,7 @@ class ContactForm extends Component {
       <div
         style={styles.contactFormContainer}
       >
-        <form>
+        <form style={styles.contactFormWidth}>
           <div>
             {this.state.userData['name'].length === 0 &&
             this.state.validated ? (

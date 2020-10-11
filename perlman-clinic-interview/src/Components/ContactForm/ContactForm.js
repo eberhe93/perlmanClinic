@@ -47,11 +47,6 @@ class ContactForm extends Component {
     this.setState({ userData: currentState });
   }
 
-  // handling gender input change
-  setGender(e) {
-    this.state.userData['gender'] = e.target.value;
-  }
-
   // sending API request
   submitForm() {
     this.setState({ errors: [], validated: true });
@@ -173,8 +168,9 @@ class ContactForm extends Component {
               </FormLabel>
               <RadioGroup
                 aria-label="gender"
-                name="gender1"
-                onChange={e => this.setGender(e)}
+                name="gender"
+                onChange={e => this.handleInputChange(e)}
+                value={this.state.userData['gender']}
               >
                 <FormControlLabel
                   value="female"

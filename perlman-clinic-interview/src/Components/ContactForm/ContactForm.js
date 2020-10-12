@@ -98,7 +98,7 @@ class ContactForm extends Component {
   showToastMessage(statusCode) {
     if (statusCode === 200) {
       this.setState({
-        errorType: constants.toastmessages.successMessage,
+        errorType: 'success',
         showToast: true,
         errors: [],
         validated: false,
@@ -111,7 +111,7 @@ class ContactForm extends Component {
       });
     } else {
       this.setState({
-        errorType: constants.toastmessages.errorMessage,
+        errorType: 'error',
         showToast: true
       });
     }
@@ -216,7 +216,7 @@ class ContactForm extends Component {
           </Button>
           {this.showLoading ? <ProgressBar /> : null}
           {this.state.showToast ? (
-            <ToastMessage message={this.state.errorType} />
+            <ToastMessage type={this.state.errorType} />
           ) : null}
         </form>
       </div>
